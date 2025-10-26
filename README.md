@@ -1,10 +1,10 @@
 # dib - Design It Better
 
-> Open source visual website builder - Create with AI, edit visually, own your code
+> Open source web and product design tool
 
 ## What is dib?
 
-dib is an open-source website builder that lets you:
+For version 1, dib is an open-source website builder that lets you:
 - ✨ Create professional websites with simple wizards
 - 🎨 Edit content visually with a live preview editor
 - 📦 Export as self-contained Next.js projects
@@ -189,11 +189,8 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 Created by Andrew Dobbs as an exploration of AI-powered visual design tools.
 
-Extracted from work on the Cedric Growth platform and open-sourced for the community.
-
 ## Acknowledgments
 
-- Built with modern development workflows including AI coding assistants
 - Inspired by Webflow, Framer, and other visual design tools
 - Standing on the shoulders of giants: Next.js, React, Mantine, and the open-source community
 
