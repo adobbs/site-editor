@@ -1,11 +1,10 @@
-# dib - Design It Better
+# dib - design it better
 
 > Open source web and product design tool
 
 ## What is dib?
 
 For version 1, dib is an open-source website builder that lets you:
-- ✨ Create professional websites with simple wizards
 - 🎨 Edit content visually with a live preview editor
 - 📦 Export as self-contained Next.js projects
 - 🚀 Deploy anywhere (Vercel, Netlify, or self-host)
@@ -169,8 +168,8 @@ No database required - everything is stored as files:
 
 ### 🚀 Future (v2+)
 - [ ] AI content generation
-- [ ] More templates (Portfolio, Blog, Landing, Agency)
-- [ ] Simple site creation wizard
+- [ ] Design system tools
+- [ ] Application design tools
 - [ ] Export as ZIP functionality
 
 ## Contributing
