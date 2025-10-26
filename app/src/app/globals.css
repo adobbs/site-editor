@@ -1,0 +1,6 @@
+/* Mantine CSS variables and resets are imported via layout.tsx */
+
+body {
+  margin: 0;
+  padding: 0;
+}

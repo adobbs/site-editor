@@ -1,0 +1,20 @@
+{
+  "site": {
+    "id": "business-template",
+    "slug": "business-template",
+    "name": "Your Business Name"
+  },
+  "config": {
+    "brand_color": "#2563EB",
+    "cta_button_enabled": true
+  },
+  "pages": {
+    "home": {
+      "headline": "Welcome to Your Business",
+      "subhead": "Professional services tailored to your needs. We help businesses grow and succeed.",
+      "cta-text": "Get Started",
+      "hero-image": "/images/hero-image.jpg"
+    }
+  },
+  "lastModified": "2025-01-26T00:00:00.000Z"
+}

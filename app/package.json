@@ -1,0 +1,41 @@
+{
+  "name": "dib-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mantine/core": "^8.2.1",
+    "@mantine/dates": "^8.2.1",
+    "@mantine/dropzone": "^8.2.1",
+    "@mantine/form": "^8.2.1",
+    "@mantine/hooks": "^8.2.1",
+    "@mantine/modals": "^8.2.1",
+    "@mantine/notifications": "^8.2.1",
+    "@tanstack/react-store": "^0.7.3",
+    "@tanstack/store": "^0.7.2",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.525.0",
+    "next": "15.4.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "zod": "^4.0.8"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.3",
+    "postcss": "^8.5.6",
+    "postcss-preset-mantine": "^1.18.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5"
+  }
+}

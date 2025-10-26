@@ -1,0 +1,27 @@
+{
+  "name": "dib",
+  "version": "1.0.0",
+  "description": "Open source visual website builder - Create with AI, edit visually, own your code",
+  "private": true,
+  "workspaces": [
+    "app"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=app",
+    "build": "npm run build --workspace=app",
+    "start": "npm run start --workspace=app"
+  },
+  "keywords": [
+    "website-builder",
+    "visual-editor",
+    "nextjs",
+    "open-source",
+    "no-code"
+  ],
+  "author": "Andrew Dobbs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adobbs/dib"
+  }
+}
