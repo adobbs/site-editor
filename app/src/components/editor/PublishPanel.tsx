@@ -20,7 +20,7 @@ const countActualChanges = (draftChanges: Map<string, ContentUpdate>, originalCo
 }
 
 interface PublishPanelProps {
-  organization: {
+  site: {
     id: string
     name: string
     slug: string
@@ -34,9 +34,9 @@ interface PublishPanelProps {
   saveDraft?: () => Promise<void>
 }
 
-export function PublishPanel({ 
-  organization, 
-  draftChanges, 
+export function PublishPanel({
+  site,
+  draftChanges,
   hasUnsavedChanges,
   hasUnpublishedChanges,
   onPublishComplete,
@@ -79,14 +79,13 @@ export function PublishPanel({
         }
       }
       const changesArray = Array.from(draftChanges.values())
-      
-      const response = await fetch('/api/content/publish', {
+
+      const response = await fetch(`/api/sites/${site.id}/publish`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          organizationSlug: organization.slug,
           changes: changesArray.map(change => ({
             pageSlug: 'home', // TODO: determine page from context
             blockKey: change.elementId

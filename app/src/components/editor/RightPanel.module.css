@@ -1,0 +1,21 @@
+.tabsList {
+  display: flex;
+  gap: var(--mantine-spacing-xs);
+  padding: var(--mantine-spacing-xs);
+  border-bottom: 1px solid var(--mantine-color-gray-2);
+}
+
+.tab {
+  color: var(--mantine-color-gray-7);
+  border-radius: var(--mantine-radius-xl);
+}
+
+.tab:hover:not(.tabActive) {
+  background-color: var(--mantine-color-gray-1);
+  color: var(--mantine-color-gray-8);
+}
+
+.tabActive {
+  background-color: var(--mantine-color-gray-2);
+  color: var(--mantine-color-black);
+}

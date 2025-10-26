@@ -17,11 +17,11 @@ interface ElementInfo {
 
 interface EditorOverlayProps {
   onContentChange?: (change: ContentUpdate) => void
-  organizationSlug?: string
+  siteId?: string
   onImageEditStart?: (elementId: string) => void
 }
 
-export function EditorOverlay({ onContentChange, organizationSlug, onImageEditStart }: EditorOverlayProps) {
+export function EditorOverlay({ onContentChange, siteId, onImageEditStart }: EditorOverlayProps) {
   const { on, off, enterEditMode, exitEditMode, updateContent } = useIframeBridge()
   const [selectedElement, setSelectedElement] = useState<ElementInfo | null>(null)
   const [editingElement, setEditingElement] = useState<string | null>(null)
@@ -38,18 +38,18 @@ export function EditorOverlay({ onContentChange, organizationSlug, onImageEditSt
 
   const startImageEditing = useCallback((element: ElementInfo) => {
     console.log('🚀 EDITOR: startImageEditing called for element:', element.id)
-    console.log('🚀 EDITOR: Organization slug:', organizationSlug)
-    
-    if (!organizationSlug) {
-      console.log('❌ EDITOR: No organization slug - cannot start image editing')
+    console.log('🚀 EDITOR: Site ID:', siteId)
+
+    if (!siteId) {
+      console.log('❌ EDITOR: No site ID - cannot start image editing')
       return
     }
-    
+
     setSelectedElement(element)
     console.log('🚀 EDITOR: Opening asset picker in right panel...')
     onImageEditStart?.(element.id)
     console.log('✅ EDITOR: Asset picker triggered successfully')
-  }, [organizationSlug, onImageEditStart])
+  }, [siteId, onImageEditStart])
 
   // Handle element selection from iframe
   const handleElementSelected = useCallback((message: IframeMessage) => {

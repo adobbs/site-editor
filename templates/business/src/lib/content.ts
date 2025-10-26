@@ -1,3 +1,6 @@
+import { promises as fs } from 'fs';
+import path from 'path';
+
 export interface ImageBlock {
   src: string;      // Static path like "/images/optimized/hero-496w.webp"
   srcset?: string;  // Responsive srcset
@@ -23,6 +26,18 @@ interface SiteContent {
       'hero-image'?: string | ImageBlock;
     };
   };
+}
+
+// Load content from local JSON file
+async function loadLocalContent(): Promise<SiteContent | null> {
+  try {
+    const contentPath = path.join(process.cwd(), 'content', 'site.json');
+    const fileContent = await fs.readFile(contentPath, 'utf-8');
+    return JSON.parse(fileContent);
+  } catch (error) {
+    console.warn('Could not read local content file:', error);
+    return null;
+  }
 }
 
 // Fetch content - tries local file first, then dib API as fallback
@@ -52,10 +67,16 @@ export async function fetchContentFromCMS(): Promise<SiteContent> {
       }
     }
   } catch (error) {
-    console.warn('dib API not available, using local content');
+    console.warn('dib API not available, trying local content');
   }
 
-  // Use local fallback content
+  // Try local content file
+  const localContent = await loadLocalContent();
+  if (localContent) {
+    return localContent;
+  }
+
+  // Use hardcoded fallback as last resort
   return getFallbackContent();
 }
 
@@ -75,14 +96,15 @@ function getFallbackContent(): SiteContent {
       home: {
         headline: 'Welcome to Your Business',
         subhead: 'Professional services tailored to your needs',
-        'cta-text': 'Get Started'
+        'cta-text': 'Get Started',
+        'hero-image': '/images/hero-image.png'
       }
     }
   };
 }
 
 // Utility function to get image properties from hero-image data
-export function getImageProps(heroImage?: string | ImageBlock, fallbackSrc: string = "/images/hero-image.jpg", fallbackAlt: string = "Business hero image") {
+export function getImageProps(heroImage?: string | ImageBlock, fallbackSrc: string = "/images/hero-image.png", fallbackAlt: string = "Business hero image") {
   // Handle ImageBlock format
   if (heroImage && typeof heroImage === 'object' && heroImage.type === 'image') {
     return {

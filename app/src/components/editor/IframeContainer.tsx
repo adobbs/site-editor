@@ -7,14 +7,14 @@ import { useIframeBridge } from '@/lib/communication/iframe-bridge'
 interface IframeContainerProps {
   src: string
   onLoad?: () => void
-  organization: {
+  site: {
     id: string
     name: string
     slug: string
   }
 }
 
-export function IframeContainer({ src, onLoad, organization }: IframeContainerProps) {
+export function IframeContainer({ src, onLoad, site }: IframeContainerProps) {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [hasError, setHasError] = useState(false)
   const { bridge } = useIframeBridge()
@@ -38,7 +38,7 @@ export function IframeContainer({ src, onLoad, organization }: IframeContainerPr
         iframe.contentWindow.postMessage({
           type: 'EDITOR_READY',
           payload: {
-            organizationSlug: organization.slug,
+            siteId: site.id,
             editorMode: true
           }
         }, '*')
@@ -48,16 +48,16 @@ export function IframeContainer({ src, onLoad, organization }: IframeContainerPr
     } catch (error) {
       console.error('Error setting up iframe communication:', error)
     }
-  }, [onLoad, organization.slug])
+  }, [onLoad, site.id])
 
   const handleIframeError = useCallback(() => {
     setHasError(true)
     notifications.show({
       title: 'Connection Error',
-      message: `Could not load ${organization.name} website. Please check if the site is running.`,
+      message: `Could not load ${site.name} website. Please check if the site is running.`,
       color: 'red'
     })
-  }, [organization.name])
+  }, [site.name])
 
   return (
     <div style={{ 
@@ -81,7 +81,7 @@ export function IframeContainer({ src, onLoad, organization }: IframeContainerPr
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
         referrerPolicy="strict-origin-when-cross-origin"
         allow="clipboard-read; clipboard-write"
-        title={`${organization.name} Website Editor`}
+        title={`${site.name} Website Editor`}
       />
       
       {/* Error State */}
@@ -102,7 +102,7 @@ export function IframeContainer({ src, onLoad, organization }: IframeContainerPr
           <div style={{ fontSize: '2rem' }}>⚠️</div>
           <h3 style={{ margin: 0, color: '#495057' }}>Connection Error</h3>
           <p style={{ margin: 0, color: '#6c757d', textAlign: 'center' }}>
-            Could not load {organization.name} website.<br />
+            Could not load {site.name} website.<br />
             Please check if the site is running on {src}
           </p>
           <button

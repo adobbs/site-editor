@@ -5,7 +5,7 @@ import { Stack, Text, Card, Group, Switch, Loader, Alert, Box } from '@mantine/c
 import { useEditorState } from '@/lib/hooks/useEditorState'
 
 interface SettingsPanelProps {
-  organization: {
+  site: {
     id: string
     name: string
     slug: string
@@ -13,19 +13,19 @@ interface SettingsPanelProps {
   onSettingsChange?: () => void
 }
 
-export function SettingsPanel({ organization, onSettingsChange }: SettingsPanelProps) {
+export function SettingsPanel({ site, onSettingsChange }: SettingsPanelProps) {
   const [ctaButtonEnabled, setCtaButtonEnabled] = useState(false)
   const [draftCtaButtonEnabled, setDraftCtaButtonEnabled] = useState<boolean | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  
+
   // Use editor state for draft management
-  const { addChange } = useEditorState(organization.slug)
+  const { addChange } = useEditorState(site.id)
 
   // Fetch current config including draft values
   useEffect(() => {
-    if (organization.slug) {
-      fetch(`/api/content/draft/${organization.slug}`)
+    if (site.id) {
+      fetch(`/api/sites/${site.id}/content`)
         .then(res => res.json())
         .then(data => {
           if (data.config) {
@@ -44,7 +44,7 @@ export function SettingsPanel({ organization, onSettingsChange }: SettingsPanelP
           setIsLoading(false)
         })
     }
-  }, [organization.slug])
+  }, [site.id])
 
   // Function to toggle CTA button (now saves to draft)
   const toggleCtaButton = (enabled: boolean) => {

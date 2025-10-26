@@ -351,7 +351,7 @@ export function EditorInterface({ site }: EditorInterfaceProps) {
         {/* Right Panel - hide in preview mode */}
         {!previewMode && (
           <RightPanel
-            organization={organization}
+            site={site}
             draftChanges={draftChanges}
             hasUnsavedChanges={hasUnsavedChanges}
             hasUnpublishedChanges={hasUnpublishedChanges}

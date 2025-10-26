@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/andydobbs/dev/cedric-growth/**)",
+      "Bash(npm run type-check:*)",
+      "Read(//Users/andydobbs/Downloads/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -34,7 +34,7 @@ interface ImageData {
 }
 
 interface AssetsPanelProps {
-  organizationSlug: string
+  siteId: string
   onSelectImage?: (image: { id: string, fileName: string, publicUrl: string }) => void
   onUploadNew?: () => void
   selectedImageId?: string | null
@@ -107,7 +107,7 @@ function ImageThumbnail({ image, isSelected, onSelect }: ImageThumbnailProps) {
 }
 
 export function AssetsPanel({
-  organizationSlug,
+  siteId,
   onSelectImage,
   onUploadNew,
   selectedImageId: _selectedImageId,
@@ -135,10 +135,10 @@ export function AssetsPanel({
   const loadImages = useCallback(async () => {
     setLoading(true)
     setError(null)
-    
+
     try {
-      const response = await fetch(`/api/images/list?organizationSlug=${organizationSlug}`)
-      
+      const response = await fetch(`/api/sites/${siteId}/images/list`)
+
       if (!response.ok) {
         const errorData = await response.json()
         throw new Error(errorData.error || 'Failed to load images')
@@ -152,7 +152,7 @@ export function AssetsPanel({
     } finally {
       setLoading(false)
     }
-  }, [organizationSlug])
+  }, [siteId])
 
   const handleImageSelect = useCallback((image: ImageData) => {
     setSelectedImage(image)
@@ -166,40 +166,37 @@ export function AssetsPanel({
   const handleUploadImages = useCallback(async (files: FileWithPath[]) => {
     setIsUploading(true)
     setUploadProgress(0)
-    
+
     try {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i]
-        
-        // Create form data for upload
-        const formData = new FormData()
-        formData.append('files', file) // Use 'files' to match API expectation
-        formData.append('organizationSlug', organizationSlug)
-        
-        // Upload to the admin API
-        console.log('📤 Uploading file:', file.name, 'for organization:', organizationSlug)
-        
-        const response = await fetch('/api/images/upload', {
-          method: 'POST',
-          body: formData
-        })
+      // Create form data for upload
+      const formData = new FormData()
 
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ error: 'Unknown upload error' }))
-          console.error('❌ Upload failed for', file.name, ':', response.status, errorData)
-          throw new Error(errorData.error || `Upload failed with status ${response.status}`)
-        }
-        
-        const result = await response.json()
-        console.log('✅ Upload successful for', file.name, ':', result)
-
-        // Update progress
-        setUploadProgress(((i + 1) / files.length) * 100)
+      // Add all files at once
+      for (const file of files) {
+        formData.append('files', file)
       }
+
+      console.log('📤 Uploading', files.length, 'file(s) for site:', siteId)
+
+      const response = await fetch(`/api/sites/${siteId}/images/upload`, {
+        method: 'POST',
+        body: formData
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown upload error' }))
+        console.error('❌ Upload failed:', response.status, errorData)
+        throw new Error(errorData.error || `Upload failed with status ${response.status}`)
+      }
+
+      const result = await response.json()
+      console.log('✅ Upload successful:', result)
+
+      setUploadProgress(100)
 
       // Refresh the images list
       await loadImages()
-      
+
       console.log('✅ Images uploaded successfully')
     } catch (error) {
       console.error('❌ Upload failed:', error)
@@ -208,23 +205,23 @@ export function AssetsPanel({
       setIsUploading(false)
       setUploadProgress(0)
     }
-  }, [organizationSlug, loadImages])
+  }, [siteId, loadImages])
 
   const handleUploadClick = useCallback(() => {
     openImageUploadModal({
       onUpload: handleUploadImages,
-      organizationSlug,
+      siteId,
       isUploading,
       uploadProgress
     })
-  }, [handleUploadImages, organizationSlug, isUploading, uploadProgress])
+  }, [handleUploadImages, siteId, isUploading, uploadProgress])
 
   // Load images when component mounts
   useEffect(() => {
-    if (organizationSlug) {
+    if (siteId) {
       loadImages()
     }
-  }, [organizationSlug, loadImages])
+  }, [siteId, loadImages])
 
   // Handle escape key to deselect
   useEffect(() => {
