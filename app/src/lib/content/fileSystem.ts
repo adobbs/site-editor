@@ -1,4 +1,4 @@
-// File-based content system for dib
+// File-based content system for Visual Website Editor
 // Replaces Supabase API calls with local file operations
 
 export interface SiteContent {
@@ -30,7 +30,7 @@ export interface DraftContent {
 
 /**
  * Load site content from file system
- * In dib, sites are stored in /generated-sites/[siteId]/
+ * In Visual Website Editor, sites are stored in /generated-sites/[siteId]/
  */
 export async function loadSiteContent(siteId: string): Promise<SiteContent | null> {
   try {
@@ -66,7 +66,7 @@ export async function saveSiteContent(siteId: string, content: SiteContent): Pro
  */
 export function loadDraftFromLocalStorage(siteId: string): Map<string, any> | null {
   try {
-    const stored = localStorage.getItem(`dib-draft-${siteId}`)
+    const stored = localStorage.getItem(`vwe-draft-${siteId}`)
     if (!stored) return null
 
     const parsed = JSON.parse(stored)
@@ -83,7 +83,7 @@ export function loadDraftFromLocalStorage(siteId: string): Map<string, any> | nu
 export function saveDraftToLocalStorage(siteId: string, changes: Map<string, any>): void {
   try {
     const obj = Object.fromEntries(changes)
-    localStorage.setItem(`dib-draft-${siteId}`, JSON.stringify(obj))
+    localStorage.setItem(`vwe-draft-${siteId}`, JSON.stringify(obj))
   } catch (error) {
     console.error('Error saving draft to localStorage:', error)
   }
@@ -94,7 +94,7 @@ export function saveDraftToLocalStorage(siteId: string, changes: Map<string, any
  */
 export function clearDraftFromLocalStorage(siteId: string): void {
   try {
-    localStorage.removeItem(`dib-draft-${siteId}`)
+    localStorage.removeItem(`vwe-draft-${siteId}`)
   } catch (error) {
     console.error('Error clearing draft from localStorage:', error)
   }

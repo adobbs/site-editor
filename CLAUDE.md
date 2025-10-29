@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**dib** (design it better) is an open-source visual website builder that lets users edit content visually with a live preview editor. It's a file-based system (no database) that generates self-contained Next.js projects.
+**Visual Website Editor** is an open-source visual website builder that lets users edit content visually with a live preview editor. It's a file-based system (no database) that generates self-contained Next.js projects.
 
 **Status**: v1.0.0-alpha - Early alpha, actively evolving
 
@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-### Main dib Editor (app/)
+### Main Visual Website Editor (app/)
 ```bash
 cd app
 npm install
@@ -31,7 +31,7 @@ npm run type-check
 ```
 
 ### Testing the Full System
-1. Start dib editor: `cd app && npm run dev` (port 3000)
+1. Start Visual Website Editor: `cd app && npm run dev` (port 3000)
 2. Start a generated site: `cd generated-sites/[site-name] && npm run dev` (port 3001)
 3. Visit `http://localhost:3001/edit` to access the visual editor
 
@@ -39,7 +39,7 @@ npm run type-check
 
 ### 1. Dual-Server Development Model
 
-dib requires **two separate dev servers** running simultaneously:
+Visual Website Editor requires **two separate dev servers** running simultaneously:
 
 - **Editor App** (`app/`): The visual editor interface at `localhost:3000`
 - **Generated Site** (`generated-sites/[site-name]/`): The actual website being edited at `localhost:3001`
@@ -66,15 +66,15 @@ The bridge handles:
 **NO DATABASE** - All content stored as JSON files in each site's `content/` directory.
 
 Content loading priority in generated sites (`templates/business/src/lib/content.ts`):
-1. **First**: Try dib API (`DIB_API_BASE` env var) - used when editor is active
+1. **First**: Try Visual Website Editor API (`VWE_API_BASE` env var) - used when editor is active
 2. **Second**: Read local `content/site.json` file - normal site operation
 3. **Fallback**: Hardcoded defaults - emergency only
 
 Environment variables in generated sites (`.env.local`):
 ```bash
 SITE_ID=my-site              # Must match directory name in generated-sites/
-DIB_APP_URL=http://localhost:3000
-DIB_API_BASE=http://localhost:3000  # Optional, enables live editing
+VWE_APP_URL=http://localhost:3000
+VWE_API_BASE=http://localhost:3000  # Optional, enables live editing
 ```
 
 ### 4. State Management: TanStack Store with Undo/Redo
@@ -149,15 +149,15 @@ Images can be either:
 ## Creating a New Site from Template
 
 ```bash
-# From dib root
+# From project root
 cp -r templates/business generated-sites/my-site
 cd generated-sites/my-site
 npm install
 
 # Create .env.local with:
 # SITE_ID=my-site
-# DIB_APP_URL=http://localhost:3000
-# DIB_API_BASE=http://localhost:3000
+# VWE_APP_URL=http://localhost:3000
+# VWE_API_BASE=http://localhost:3000
 
 npm run dev  # Runs on port 3001
 ```
@@ -177,7 +177,7 @@ Visit `http://localhost:3001/edit` to edit (redirects to editor at port 3000)
 
 ### Editor can't connect to site
 - Both servers must be running (ports 3000 and 3001)
-- Check `DIB_API_BASE` in site's `.env.local`
+- Check `VWE_API_BASE` in site's `.env.local`
 - Verify iframe origin is in allowed list
 
 ## Tech Stack
@@ -187,10 +187,6 @@ Visit `http://localhost:3001/edit` to edit (redirects to editor at port 3000)
 - **TanStack Store** for state management
 - **PostCSS** with Tailwind v4 (in templates)
 - **No database** - pure file system operations
-
-## Branding
-
-Use lowercase: "design it better" (not "Design It Better")
 
 ## Not Accepting External Contributions
 

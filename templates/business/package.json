@@ -1,6 +1,6 @@
 {
   "name": "business-template",
-  "description": "Generic business website template for dib - customizable with visual editor",
+  "description": "Generic business website template for Visual Website Editor - customizable with visual editor",
   "version": "0.1.0",
   "private": true,
   "scripts": {

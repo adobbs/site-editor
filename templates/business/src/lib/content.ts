@@ -40,15 +40,15 @@ async function loadLocalContent(): Promise<SiteContent | null> {
   }
 }
 
-// Fetch content - tries local file first, then dib API as fallback
+// Fetch content - tries local file first, then Visual Website Editor API as fallback
 export async function fetchContentFromCMS(): Promise<SiteContent> {
   const siteId = process.env.SITE_ID;
-  const dibApiBase = process.env.DIB_API_BASE;
+  const vweApiBase = process.env.VWE_API_BASE;
 
   try {
-    // Try dib API if configured (for when editing with visual editor)
-    if (dibApiBase && siteId) {
-      const response = await fetch(`${dibApiBase}/api/sites/${siteId}/content`, {
+    // Try Visual Website Editor API if configured (for when editing with visual editor)
+    if (vweApiBase && siteId) {
+      const response = await fetch(`${vweApiBase}/api/sites/${siteId}/content`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -67,7 +67,7 @@ export async function fetchContentFromCMS(): Promise<SiteContent> {
       }
     }
   } catch (error) {
-    console.warn('dib API not available, trying local content');
+    console.warn('Visual Website Editor API not available, trying local content');
   }
 
   // Try local content file

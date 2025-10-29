@@ -7,7 +7,7 @@ const SITES_DIR = path.join(process.cwd(), '..', 'generated-sites')
 
 /**
  * POST /api/sites/[siteId]/publish
- * Publish draft changes - in dib this means writing content to the site's data files
+ * Publish draft changes - in Visual Website Editor this means writing content to the site's data files
  * and optionally triggering a rebuild
  */
 export async function POST(

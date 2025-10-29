@@ -8,7 +8,7 @@ import '@mantine/dropzone/styles.css'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'dib - design it better',
+  title: 'Visual Website Editor',
   description: 'Open source visual website builder - Create with AI, edit visually, own your code',
 }
 
