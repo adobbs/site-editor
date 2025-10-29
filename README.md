@@ -1,47 +1,42 @@
-# dib - design it better
+# Visual Website Editor
 
-> Open source web and product design tool
+> Open source visual website editor
 
-## What is dib?
+## What is Visual Website Editor?
 
-For version 1, dib is an open-source website builder that lets you:
-- 🎨 Edit content visually with a live preview editor
-- 📦 Export as self-contained Next.js projects
-- 🚀 Deploy anywhere (Vercel, Netlify, or self-host)
-- 💾 Own your code and content (no vendor lock-in)
+An open source visual website editor that lets you edit content visually with a live preview editor.
 
 ## Features
 
 - **Visual Editor**: Click-to-edit interface with real-time preview
 - **Undo/Redo**: Full history tracking with sophisticated state management
 - **File-Based**: Content stored as JSON files, easy to version control
-- **Template System**: Start with professional, customizable templates
 - **Modern Stack**: Built with Next.js 15, React 19, TypeScript, Mantine UI
 - **No Database Required**: Everything runs locally, no complex setup
 
 ## Quick Start
 
-### Step 1: Set up dib editor
+### Step 1: Set up Visual Website Editor
 
 ```bash
 # Clone the repository
-git clone https://github.com/adobbs/dib.git
-cd dib
+git clone https://github.com/adobbs/site-editor.git
+cd site-editor
 
 # Install dependencies for main app
 cd app
 npm install
 
-# Start the dib editor
+# Start the Visual Website Editor
 npm run dev
 ```
 
-The dib editor will run at `http://localhost:3000`
+The Visual Website Editor will run at `http://localhost:3000`
 
 ### Step 2: Create your first site from template
 
 ```bash
-# From dib root directory
+# From Visual Website Editor root directory
 cp -r templates/business generated-sites/my-business
 
 # Navigate to your site
@@ -65,12 +60,12 @@ Your site will run at `http://localhost:3001`
 
 ### Step 3: Edit visually
 
-Visit `http://localhost:3001/dib` and you'll be redirected to the visual editor!
+Visit `http://localhost:3001/edit` and you'll be redirected to the visual editor!
 
 ## Project Structure
 
 ```
-dib/
+site-editor/
 ├── app/                    # Main application
 │   ├── src/
 │   │   ├── app/            # Next.js app router
@@ -102,13 +97,11 @@ Start with a professional template:
 - Customize colors and settings in the content file
 
 ### 2. Edit Visually
-Powerful visual editor with:
+Basic visual editor with:
 - Click any text to edit inline
 - Replace images with your own
-- Toggle components on/off
-- Change colors and settings
 - Full undo/redo support
-- Access via `/dib` route on your site
+- Access via `/edit` route on your site
 
 ### 3. Build & Deploy
 Your site is a complete Next.js project:
@@ -159,18 +152,7 @@ No database required - everything is stored as files:
 - [x] File-based content API routes
 - [x] Visual editor components (extracted from cedric-growth)
 - [x] Business template (genericized)
-- [x] `/dib` route for editor access
-
-### 📋 Planned for v1.0
-- [ ] End-to-end testing and polish
-- [ ] Example site with full content
-- [ ] Deployment documentation
-
-### 🚀 Future (v2+)
-- [ ] AI content generation
-- [ ] Design system tools
-- [ ] Application design tools
-- [ ] Export as ZIP functionality
+- [x] `/edit` route for editor access
 
 ## Contributing
 
@@ -186,13 +168,12 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 ## Built By
 
-Created by Andrew Dobbs as an exploration of AI-powered visual design tools.
+Created by Andrew Dobbs as an exploration of visual website editing tools.
 
 ## Acknowledgments
 
-- Inspired by Webflow, Framer, and other visual design tools
 - Standing on the shoulders of giants: Next.js, React, Mantine, and the open-source community
 
 ---
 
-**Note**: This is v1.0 alpha. The project is functional but still evolving. Expect changes and improvements!
+**Note**: The project is functional but still evolving. Expect changes and improvements!

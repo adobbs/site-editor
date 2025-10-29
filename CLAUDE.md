@@ -33,7 +33,7 @@ npm run type-check
 ### Testing the Full System
 1. Start dib editor: `cd app && npm run dev` (port 3000)
 2. Start a generated site: `cd generated-sites/[site-name] && npm run dev` (port 3001)
-3. Visit `http://localhost:3001/dib` to access the visual editor
+3. Visit `http://localhost:3001/edit` to access the visual editor
 
 ## Critical Architecture Patterns
 
@@ -162,7 +162,7 @@ npm install
 npm run dev  # Runs on port 3001
 ```
 
-Visit `http://localhost:3001/dib` to edit (redirects to editor at port 3000)
+Visit `http://localhost:3001/edit` to edit (redirects to editor at port 3000)
 
 ## Common Issues
 

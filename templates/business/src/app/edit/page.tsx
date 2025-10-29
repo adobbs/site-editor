@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
-// This page handles the `/dib` URL functionality
+// This page handles the `/edit` URL functionality
 // It redirects users to the visual editor in the main dib app
-export default function DibEditorPage() {
+export default function EditPage() {
   // Get the site ID from environment variable
   const siteId = process.env.SITE_ID || 'business-template'
 
