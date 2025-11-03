@@ -176,4 +176,4 @@ Created by Andrew Dobbs as an exploration of visual website editing tools.
 
 ---
 
-**Note**: The project is functional but still evolving. Expect changes and improvements!
+**Note**: The project is functional but still evolving. Adapted from a version of the app that was integrated with a Postgres database, so there could still be some bugs related to local file storage. Expect changes and improvements!
